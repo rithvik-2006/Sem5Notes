@@ -61,29 +61,112 @@ For each event E of the sample space S, a number P(E), called the **probability 
     **P(E) = P(EF) + P(EFc) = P(E|F)P(F) + P(E|Fc)P(Fc)**. This means P(E) is a weighted average of the conditional probabilities of E given F and E given Fc.
 *   **Generalization of Total Probability**: If F1, F2, . . . , Fn are mutually exclusive events such that their union covers the entire sample space S (meaning exactly one of them must occur), then:
     **P(E) = ∑n i=1 P(EFi) = ∑n i=1 P(E|Fi)P(Fi)**.
+Here's a cleaned up and more readable version of your README:
 
-### 1.5 Independent Events
+# Probability Theory: Independent Events and Bayes' Formula
 
-*   **Definition**: Two events E and F are said to be **independent if P(EF) = P(E)P(F)**.
-*   **Equivalent Implications**: If E and F are independent:
-    *   **P(E|F) = P(E)** (if P(F) > 0).
-    *   **P(F|E) = P(F)** (if P(E) > 0).
-    *   This means that **knowledge that F has occurred does not affect the probability that E occurs**.
-*   **Dependent Events**: Events that are **not independent** are called dependent.
-    *   *Example of Dependent Events*: Tossing two fair dice. Let E1 be the event that the sum is six, and F be the event that the first die equals four. P(E1F) = P({(4,2)}) = 1/36. P(E1) = P({(1,5),(2,4),(3,3),(4,2),(5,1)}) = 5/36. P(F) = 1/6. Since P(E1F) (1/36) ≠ P(E1)P(F) (5/36 * 1/6 = 5/216), E1 and F are **not independent**. Intuitively, the outcome of the first die *does* affect the probability of getting a sum of six.
-*   **Independence for Multiple Events**: Events E1, E2, . . . , En are independent if for any subset of these events, the probability of their intersection is the product of their individual probabilities. Intuitively, this means **knowledge of the occurrence of any of these events has no effect on the probability of any other event**.
-*   **Pairwise Independent vs. Mutually Independent**: It is possible for events to be pairwise independent (meaning any two events are independent) but not mutually independent.
+## 1.5 Independent Events
 
-### 1.6 Bayes’ Formula
+### Definition
+Two events E and F are **independent** if:
+```
+P(E ∩ F) = P(E) × P(F)
+```
 
-*   **Purpose**: Bayes’ formula is used to determine the conditional probability of one of a set of mutually exclusive and exhaustive events (Fj) having occurred, given that another event (E) has occurred.
-*   **Formula**: Given mutually exclusive events F1, F2, . . . , Fn such that ⋃n i=1 Fi = S, the conditional probability of Fj given E is:
-    **P(Fj|E) = [P(E|Fj)P(Fj)] / [∑n i=1 P(E|Fi)P(Fi)]**.
-    *   This formula combines the definition of conditional probability (P(Fj|E) = P(EFj)/P(E)) with the Law of Total Probability for P(E) in the denominator.
-*   *Examples*:
-    *   **Urn Problem**: Two urns, one with 2 white/7 black, another with 5 white/6 black. A fair coin flip determines which urn to draw from. If a white ball (W) is selected, what's the probability the coin was heads (H)?
-        P(H|W) = [P(W|H)P(H)] / [P(W|H)P(H) + P(W|Hc)P(Hc)] = [(2/9)*(1/2)] / [(2/9)*(1/2) + (5/11)*(1/2)] = 22/67.
-    *   **Multiple-Choice Test**: A student either knows the answer (K) with probability p or guesses (Gc) with probability 1-p. Guessing is correct (C) with probability 1/m. What is P(K|C)?
-        P(K|C) = [P(C|K)P(K)] / [P(C|K)P(K) + P(C|Gc)P(Gc)] = [1*p] / [1*p + (1/m)*(1-p)] = pm / [pm + 1 - p].
-    *   **Disease Testing**: Probability of having a disease (D) is 0.005. Test result positive (E) for 95% of those with disease, and 1% of those without. What is P(D|E)?
-        P(D|E) = [P(E|D)P(D)] / [P(E|D)P(D) + P(E|Dc)P(Dc)] = [(0.95)*(0.005)] / [(0.95)*(0.005) + (0.01)*(0.995)] ≈ 0.323. This example highlights that a positive test result does not guarantee the disease due to the low prior probability of the disease.
+### Key Properties
+When events E and F are independent:
+- **P(E|F) = P(E)** (if P(F) > 0)
+- **P(F|E) = P(F)** (if P(E) > 0)
+- Knowledge that F has occurred does not affect the probability that E occurs
+
+### Dependent Events
+Events that are **not independent** are called **dependent**.
+
+#### Example: Dice Rolling
+Consider tossing two fair dice:
+- Let E₁ = event that the sum equals 6
+- Let F = event that the first die equals 4
+
+**Calculations:**
+- P(E₁ ∩ F) = P({(4,2)}) = 1/36
+- P(E₁) = P({(1,5), (2,4), (3,3), (4,2), (5,1)}) = 5/36
+- P(F) = 1/6
+
+**Independence Test:**
+- P(E₁) × P(F) = (5/36) × (1/6) = 5/216
+- Since P(E₁ ∩ F) = 1/36 ≠ 5/216, the events are **dependent**
+
+**Intuition:** The outcome of the first die affects the probability of getting a sum of 6.
+
+### Multiple Events
+Events E₁, E₂, ..., Eₙ are **mutually independent** if for any subset of these events, the probability of their intersection equals the product of their individual probabilities.
+
+**Important Distinction:**
+- **Pairwise independent**: Any two events are independent
+- **Mutually independent**: All possible combinations are independent
+- Events can be pairwise independent but not mutually independent
+
+## 1.6 Bayes' Formula
+
+### Purpose
+Bayes' formula calculates the conditional probability of one event from a set of mutually exclusive and exhaustive events, given that another event has occurred.
+
+### Formula
+For mutually exclusive events F₁, F₂, ..., Fₙ where ⋃ᵢ₌₁ⁿ Fᵢ = S:
+
+```
+P(Fⱼ|E) = [P(E|Fⱼ) × P(Fⱼ)] / [∑ᵢ₌₁ⁿ P(E|Fᵢ) × P(Fᵢ)]
+```
+
+This combines:
+- **Conditional probability definition**: P(Fⱼ|E) = P(E ∩ Fⱼ)/P(E)
+- **Law of Total Probability** for the denominator
+
+### Examples
+
+#### 1. Urn Problem
+**Setup:**
+- Urn 1: 2 white, 7 black balls
+- Urn 2: 5 white, 6 black balls
+- Fair coin flip determines which urn to use
+
+**Question:** If a white ball is drawn, what's the probability the coin was heads?
+
+**Solution:**
+```
+P(H|W) = [P(W|H) × P(H)] / [P(W|H) × P(H) + P(W|Hͨ) × P(Hͨ)]
+       = [(2/9) × (1/2)] / [(2/9) × (1/2) + (5/11) × (1/2)]
+       = 22/67
+```
+
+#### 2. Multiple-Choice Test
+**Setup:**
+- Student knows answer with probability p
+- Otherwise guesses with probability (1-p)
+- Correct guess probability = 1/m
+
+**Question:** Given a correct answer, what's the probability the student knew it?
+
+**Solution:**
+```
+P(K|C) = [P(C|K) × P(K)] / [P(C|K) × P(K) + P(C|Gͨ) × P(Gͨ)]
+       = [1 × p] / [1 × p + (1/m) × (1-p)]
+       = pm / [pm + 1 - p]
+```
+
+#### 3. Disease Testing
+**Setup:**
+- Disease probability: P(D) = 0.005
+- Test sensitivity: P(E|D) = 0.95 (95% of diseased test positive)
+- False positive rate: P(E|Dͨ) = 0.01 (1% of healthy test positive)
+
+**Question:** Given a positive test, what's the probability of having the disease?
+
+**Solution:**
+```
+P(D|E) = [P(E|D) × P(D)] / [P(E|D) × P(D) + P(E|Dͨ) × P(Dͨ)]
+       = [(0.95) × (0.005)] / [(0.95) × (0.005) + (0.01) × (0.995)]
+       ≈ 0.323
+```
+
+**Key Insight:** Even with a positive test result, there's only a 32.3% chance of having the disease due to its low prior probability. This demonstrates the importance of considering base rates in medical testing.
