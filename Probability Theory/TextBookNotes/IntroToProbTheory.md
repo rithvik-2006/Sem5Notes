@@ -1,172 +1,98 @@
-Here are detailed revision notes on the specified topics from "Introduction to Probability Theory":
+Here are detailed revision notes on Chapter 3: "Elements of Probability", drawing from the provided sources:
 
-### 1 Introduction to Probability Theory
+**Chapter 3: Elements of Probability**
 
-This chapter introduces **elementary probability theory** and **stochastic processes**, particularly showing how probability theory can be applied in various fields like engineering, computer science, management science, and the physical, social, and operations research sciences. The text employs a **heuristic and nonrigorous approach** to develop an intuitive understanding, emphasizing the ability to "think probabilistically". Chapters 1 and 2 lay out the basic ideas, with Chapter 1 establishing an **axiomatic framework**.
+This chapter introduces the fundamental concepts of probability theory, including the definition of sample spaces, events, axioms of probability, and methods for calculating probabilities, especially in scenarios with equally likely outcomes. It also delves into the crucial concepts of conditional probability and independent events, which are essential for understanding statistical inference.
 
-### 1.1 Introduction
+### 3.2 Sample Space and Events
 
-Any realistic model of a real-world phenomenon must account for **randomness**. Quantities of interest are often not predictable in advance but exhibit inherent variation, which is incorporated into the model by making it **probabilistic in nature**, leading to what is called a **probability model**. Mastering these models requires fundamental knowledge of basic probability theory, which is the focus of this chapter and the subsequent two.
+*   **Experiment**: An activity whose outcome is not predictable with certainty in advance.
+*   **Sample Space (S)**: The set of all possible outcomes of an experiment.
+    *   *Example*: For determining the sex of a newborn child, S = {g, b} (girl, boy).
+*   **Event**: Any subset of the sample space. An event occurs if the outcome of the experiment is contained in that subset.
+*   **Union (E ∪ F)**: The event consisting of all outcomes that are in E or in F or in both E and F. The event E ∪ F occurs if E occurs, or F occurs, or both occur.
+*   **Intersection (EF or E ∩ F)**: The event consisting of all outcomes that are in both E and F. The event EF will occur only if both E and F occur.
+*   **Null Event (∅)**: An event that contains no outcomes and hence cannot occur.
+*   **Mutually Exclusive Events**: Two events E and F are mutually exclusive if their intersection is the null event (EF = ∅), implying they cannot both occur.
+*   **Complement (Ec)**: For any event E, Ec consists of all outcomes in the sample space S that are not in E. Ec occurs if and only if E does not occur.
+    *   *Note*: Sc = ∅.
+*   **Subset (E ⊂ F)**: If all outcomes in E are also in F, then E is contained in F. The occurrence of E necessarily implies the occurrence of F.
+*   **Equality (E = F)**: E and F are equal if E ⊂ F and F ⊂ E.
 
-### 1.2 Sample Space and Events
+### 3.3 Venn Diagrams and the Algebra of Events
 
-*   **Sample Space (S)**: This is the **set of all possible outcomes of an experiment** whose outcome is not predictable in advance, but whose set of possible outcomes is known.
-    *   *Examples*:
-        *   Flipping a coin: **S = {H, T}** (Head or Tail).
-        *   Rolling a die: **S = {1, 2, 3, 4, 5, 6}**.
-        *   Flipping two coins: **S = {(H, H), (H, T), (T, H), (T, T)}**.
-        *   Rolling two dice: S consists of 36 points, e.g., (1,1) to (6,6).
-*   **Event (E)**: An **event is any subset of the sample space S**. An event E is said to **occur when the outcome of the experiment lies in E**.
-    *   *Examples*:
-        *   From S = {H, T}: **E = {H}** (a head appears).
-        *   From S = {1, 2, 3, 4, 5, 6}: **E = {2, 4, 6}** (an even number appears).
-        *   From S = {(H, H), (H, T), (T, H), (T, T)}: **E = {(H, H), (H, T)}** (a head appears on the first coin).
-        *   From rolling two dice: **E = {(1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1)}** (sum of dice equals seven).
-*   **Operations on Events**:
-    *   **Union (E ∪ F)**: Consists of all outcomes that are **either in E or in F or in both E and F**. The event E ∪ F will occur if either E or F occurs.
-        *   *Example*: If E = {1, 3, 5} and F = {1, 2, 3} (from rolling a die), then **E ∪ F = {1, 2, 3, 5}**.
-    *   **Intersection (EF or E ∩ F)**: Consists of all outcomes that are **both in E and in F**. The event EF will occur only if both E and F occur.
-        *   *Example*: If E = {1, 3, 5} and F = {1, 2, 3}, then **EF = {1, 3}**.
-    *   **Complement (Ec)**: Consists of all outcomes in the sample space S that are **not in E**. Ec will occur if and only if E does not occur.
-        *   *Example*: If E is the event that the sum of two dice equals seven, then **Ec occurs if the sum does not equal seven**.
-    *   **Mutually Exclusive Events**: Events E and F are mutually exclusive if their intersection is empty (EF = Ø).
+*   **Venn Diagram**: A graphical representation where the sample space S is a large rectangle, and events are represented as circles within it. Shaded regions indicate events of interest.
+    *   *Example*: Shaded regions can represent E ∪ F, EF, or Ec.
+*   **Laws of Event Algebra**:
+    *   **Commutative Law**:
+        *   E ∪ F = F ∪ E
+        *   EF = FE
+    *   **Associative Law**:
+        *   (E ∪ F) ∪ G = E ∪ (F ∪ G)
+        *   (EF)G = E(FG)
+    *   **Distributive Law**:
+        *   (E ∪ F)G = EG ∪ FG
+        *   EF ∪ G = (E ∪ G)(F ∪ G)
+        *   *Proof Sketch*: Verified by showing that any outcome in the left side is in the right side, and vice versa, often using Venn diagrams.
+    *   **DeMorgan’s Laws**:
+        *   (E ∪ F)c = EcFc
+        *   (EF)c = Ec ∪ Fc
 
-### 1.3 Probabilities Defined on Events
+### 3.4 Axioms of Probability
 
-For each event E of the sample space S, a number P(E), called the **probability of the event E**, is defined and must satisfy three conditions (axioms):
-*   **(i) 0 ≤ P(E) ≤ 1**: The probability of any event is a non-negative number between 0 and 1, inclusive.
-*   **(ii) P(S) = 1**: The probability of the entire sample space (that some outcome occurs) is 1.
-*   **(iii) For any sequence of mutually exclusive events E1, E2, ...**:
-    **P(⋃∞ n=1 En) = ∑∞ n=1 P(En)**. The probability of the union of any sequence of mutually exclusive events is the sum of their individual probabilities.
+The concept of probability is interpreted as a **constant limiting frequency** of an event when an experiment is continually repeated under the same conditions.
+*   For each event E of an experiment, there is a number **P(E)** that adheres to the following axioms:
+    *   **Axiom 1**: **0 ≤ P(E) ≤ 1**. (The probability of an event is between 0 and 1.)
+    *   **Axiom 2**: **P(S) = 1**. (The outcome will be a member of the sample space with probability 1.)
+    *   **Axiom 3**: For any sequence of mutually exclusive events E1, E2, ... (where EiEj = ∅ when i ≠ j):
+        *   **P(⋃i=1 to n Ei) = ∑i=1 to n P(Ei)** for n = 1, 2, ..., ∞. (The probability that at least one of these events occurs is the sum of their probabilities.)
 
-*   **Intuitive Property**: If an experiment is repeated many times, the **proportion of time that event E occurs will (with probability 1) be P(E)**.
-*   **Derived Properties**:
-    *   **Probability of a Complement**: Since E and Ec are mutually exclusive and E ∪ Ec = S, it follows that **P(Ec) = 1 − P(E)**. This means the probability that an event does not occur is one minus the probability that it does occur.
-    *   **Inclusion-Exclusion Identity (for two events)**: The probability of the union of two events E and F is given by **P(E ∪ F) = P(E) + P(F) − P(EF)**. This accounts for outcomes in the intersection EF being counted twice in P(E) + P(F).
-        *   *Example*: For two coin flips, P(first head or second head) = P(first head) + P(second head) - P(both heads) = 1/2 + 1/2 - 1/4 = 3/4.
-    *   **Inclusion-Exclusion Identity (for three events)**:
-        **P(E ∪ F ∪ G) = P(E) + P(F) + P(G) − P(EF) − P(EG) − P(FG) + P(EFG)**.
-    *   **General Inclusion-Exclusion Identity (for n events)**:
-        **P(E1 ∪ E2 ∪ · · · ∪ En) = ∑i P(Ei) − ∑i<j P(EiEj) + ∑i<j<k P(EiEjEk) − · · · + (−1)n+1P(E1E2 · · · En)**. This formula states that the probability of the union of n events is the sum of probabilities taken one at a time, minus sums taken two at a time, plus sums taken three at a time, and so on.
+*   **Proposition 3.4.1**: **P(Ec) = 1 − P(E)**.
+    *   **Proof Sketch**: E and Ec are mutually exclusive events, and their union is the sample space S (E ∪ Ec = S). By Axiom 3, P(E ∪ Ec) = P(E) + P(Ec). By Axiom 2, P(S) = 1. Therefore, 1 = P(E) + P(Ec), which implies P(Ec) = 1 - P(E).
+*   **Proposition 3.4.2**: **P(E ∪ F) = P(E) + P(F) − P(EF)**.
+    *   **Proof Sketch**: Using a Venn diagram, E ∪ F can be divided into three mutually exclusive regions: I (E and not F), II (E and F), and III (F and not E).
+        *   P(E ∪ F) = P(I) + P(II) + P(III).
+        *   P(E) = P(I) + P(II).
+        *   P(F) = P(II) + P(III).
+        *   Substitute to get P(E ∪ F) = P(E) + P(F) - P(II). Since region II is EF, the result follows.
+*   **Odds of an event A**: Defined as **P(A) / P(Ac) = P(A) / (1 − P(A))**. It indicates how much more likely A is to occur than not to occur.
 
-### 1.4 Conditional Probabilities
+### 3.5 Sample Spaces Having Equally Likely Outcomes
 
-*   **Definition**: The **conditional probability of E given F**, denoted **P(E|F)**, is defined as the probability that E occurs given that F has occurred. It is calculated as:
-    **P(E|F) = P(EF) / P(F)**, provided P(F) > 0.
-    *   *Interpretation*: If F is known to have occurred, F becomes the new sample space. For E to occur, the outcome must be in EF. Thus, P(E|F) is the probability of EF relative to the probability of F.
-    *   *Example*: If two fair dice are tossed, and the first die is a four (F), the conditional probability that the sum is six (E) is 1/6, because out of the 6 possible outcomes where the first die is a four, only (4,2) sums to six. Using the formula: P(EF) = P({(4,2)}) = 1/36, P(F) = P({(4,1), ..., (4,6)}) = 6/36. So P(E|F) = (1/36) / (6/36) = 1/6.
-*   **Multiplication Rule**: From the definition, we can also write **P(EF) = P(F)P(E|F)**. This is useful for calculating the probability of both events occurring.
-    *   *Example*: Drawing two black balls from an urn (7 black, 5 white) without replacement. P(first black and second black) = P(first black) * P(second black | first black) = (7/12) * (6/11) = 42/132.
-*   **Law of Total Probability**: If F is an event, we can express the probability of any event E as:
-    **P(E) = P(EF) + P(EFc) = P(E|F)P(F) + P(E|Fc)P(Fc)**. This means P(E) is a weighted average of the conditional probabilities of E given F and E given Fc.
-*   **Generalization of Total Probability**: If F1, F2, . . . , Fn are mutually exclusive events such that their union covers the entire sample space S (meaning exactly one of them must occur), then:
-    **P(E) = ∑n i=1 P(EFi) = ∑n i=1 P(E|Fi)P(Fi)**.
-Here's a cleaned up and more readable version of your README:
+*   **Assumption**: For a finite sample space S = {1, 2, ..., N}, each outcome is equally likely, meaning **P({i}) = 1/N** for all i.
+*   **Probability Calculation**: For any event E, **P(E) = (Number of points in E) / N**.
+*   **Basic Principle of Counting**: If experiment 1 has *m* outcomes, and for each outcome of experiment 1, experiment 2 has *n* outcomes, then there are **mn** total possible outcomes of the two experiments.
+    *   **Proof Sketch**: Outcomes can be enumerated as (i, j) pairs, forming a matrix with *m* rows and *n* columns, totaling *mn* elements.
+*   **Generalized Basic Principle of Counting**: If *r* experiments are performed sequentially, and the *k*-th experiment has *nk* outcomes regardless of prior outcomes, then there are a total of **n1 · n2 · · · nr** possible outcomes.
+*   **Permutations**: The number of different ordered arrangements of *n* distinct objects is **n!** (n factorial), where n! = n(n-1)...(2)(1) and 0! = 1.
+*   **Combinations**: The number of ways to choose *k* items from a set of *n* items is denoted by **(n k)** (n choose k).
 
-# Probability Theory: Independent Events and Bayes' Formula
+### 3.6 Conditional Probability
 
-## 1.5 Independent Events
+*   **Conditional Probability (P(E | F))**: The probability of event E occurring given that event F has already occurred. It is defined as **P(E | F) = P(EF) / P(F)**, provided that P(F) > 0.
+    *   **Interpretation**: If F occurs, F becomes the new sample space. For E to occur, the outcome must be in EF. The probability of EF relative to F is P(EF)/P(F). This is consistent with the long-run relative frequency interpretation.
+*   **Multiplication Rule**: Derived from the definition of conditional probability, it states that the probability that both E and F occur is **P(EF) = P(F)P(E | F)**.
 
-### Definition
-Two events E and F are **independent** if:
-```
-P(E ∩ F) = P(E) × P(F)
-```
+### 3.7 Bayes’ Formula
 
-### Key Properties
-When events E and F are independent:
-- **P(E|F) = P(E)** (if P(F) > 0)
-- **P(F|E) = P(F)** (if P(E) > 0)
-- Knowledge that F has occurred does not affect the probability that E occurs
+*   **Decomposition of an Event**: Any event E can be expressed as the union of two mutually exclusive events: **E = EF ∪ EFc**.
+*   **Law of Total Probability**: This formula is used to compute P(E) by conditioning on whether or not another event F has occurred:
+    *   **P(E) = P(EF) + P(EFc) = P(E | F)P(F) + P(E | Fc)[1 − P(F)]**.
+    *   **Generalization**: If F1, F2, ..., Fn are mutually exclusive events such that their union is S (i.e., they form a partition of S), then:
+        *   **P(E) = ∑i=1 to n P(EFi) = ∑i=1 to n P(E | Fi)P(Fi)**.
+*   **Bayes’ Formula**: Used to re-evaluate an initial probability assessment (prior) in light of new information (evidence). If E has occurred, the conditional probability of Fj is:
+    *   **P(Fj | E) = [P(E | Fj)P(Fj)] / [∑i=1 to n P(E | Fi)P(Fi)]**.
+    *   **Interpretation**: Bayes' formula shows how **opinions about hypotheses P(Fj)** held *before* an experiment are modified by the evidence of the experiment to yield **posterior probabilities P(Fj | E)**.
 
-### Dependent Events
-Events that are **not independent** are called **dependent**.
+### 3.8 Independent Events
 
-#### Example: Dice Rolling
-Consider tossing two fair dice:
-- Let E₁ = event that the sum equals 6
-- Let F = event that the first die equals 4
-
-**Calculations:**
-- P(E₁ ∩ F) = P({(4,2)}) = 1/36
-- P(E₁) = P({(1,5), (2,4), (3,3), (4,2), (5,1)}) = 5/36
-- P(F) = 1/6
-
-**Independence Test:**
-- P(E₁) × P(F) = (5/36) × (1/6) = 5/216
-- Since P(E₁ ∩ F) = 1/36 ≠ 5/216, the events are **dependent**
-
-**Intuition:** The outcome of the first die affects the probability of getting a sum of 6.
-
-### Multiple Events
-Events E₁, E₂, ..., Eₙ are **mutually independent** if for any subset of these events, the probability of their intersection equals the product of their individual probabilities.
-
-**Important Distinction:**
-- **Pairwise independent**: Any two events are independent
-- **Mutually independent**: All possible combinations are independent
-- Events can be pairwise independent but not mutually independent
-
-## 1.6 Bayes' Formula
-
-### Purpose
-Bayes' formula calculates the conditional probability of one event from a set of mutually exclusive and exhaustive events, given that another event has occurred.
-
-### Formula
-For mutually exclusive events F₁, F₂, ..., Fₙ where ⋃ᵢ₌₁ⁿ Fᵢ = S:
-
-```
-P(Fⱼ|E) = [P(E|Fⱼ) × P(Fⱼ)] / [∑ᵢ₌₁ⁿ P(E|Fᵢ) × P(Fᵢ)]
-```
-
-This combines:
-- **Conditional probability definition**: P(Fⱼ|E) = P(E ∩ Fⱼ)/P(E)
-- **Law of Total Probability** for the denominator
-
-### Examples
-
-#### 1. Urn Problem
-**Setup:**
-- Urn 1: 2 white, 7 black balls
-- Urn 2: 5 white, 6 black balls
-- Fair coin flip determines which urn to use
-
-**Question:** If a white ball is drawn, what's the probability the coin was heads?
-
-**Solution:**
-```
-P(H|W) = [P(W|H) × P(H)] / [P(W|H) × P(H) + P(W|Hͨ) × P(Hͨ)]
-       = [(2/9) × (1/2)] / [(2/9) × (1/2) + (5/11) × (1/2)]
-       = 22/67
-```
-
-#### 2. Multiple-Choice Test
-**Setup:**
-- Student knows answer with probability p
-- Otherwise guesses with probability (1-p)
-- Correct guess probability = 1/m
-
-**Question:** Given a correct answer, what's the probability the student knew it?
-
-**Solution:**
-```
-P(K|C) = [P(C|K) × P(K)] / [P(C|K) × P(K) + P(C|Gͨ) × P(Gͨ)]
-       = [1 × p] / [1 × p + (1/m) × (1-p)]
-       = pm / [pm + 1 - p]
-```
-
-#### 3. Disease Testing
-**Setup:**
-- Disease probability: P(D) = 0.005
-- Test sensitivity: P(E|D) = 0.95 (95% of diseased test positive)
-- False positive rate: P(E|Dͨ) = 0.01 (1% of healthy test positive)
-
-**Question:** Given a positive test, what's the probability of having the disease?
-
-**Solution:**
-```
-P(D|E) = [P(E|D) × P(D)] / [P(E|D) × P(D) + P(E|Dͨ) × P(Dͨ)]
-       = [(0.95) × (0.005)] / [(0.95) × (0.005) + (0.01) × (0.995)]
-       ≈ 0.323
-```
-
-**Key Insight:** Even with a positive test result, there's only a 32.3% chance of having the disease due to its low prior probability. This demonstrates the importance of considering base rates in medical testing.
+*   **Definition**: Two events E and F are **independent** if knowledge that F has occurred does not change the probability that E occurs. Mathematically, **P(E | F) = P(E)**. This definition implies and is equivalent to **P(EF) = P(E)P(F)**.
+    *   **Symmetry**: If E is independent of F, then F is independent of E.
+    *   **Dependent Events**: Events that are not independent are said to be dependent.
+*   **Proposition 3.8.1**: If E and F are independent, then E and Fc are also independent.
+    *   **Proof Sketch**: Since E = EF ∪ EFc (mutually exclusive events), P(E) = P(EF) + P(EFc). Given E and F are independent, P(EF) = P(E)P(F). Substituting this yields P(E) = P(E)P(F) + P(EFc), which simplifies to P(EFc) = P(E)(1 - P(F)) = P(E)P(Fc). This shows E and Fc are independent.
+*   **Independence of Multiple Events**:
+    *   E, F, and G are **independent** if all pairwise independence conditions hold (P(EF) = P(E)P(F), P(EG) = P(E)P(G), P(FG) = P(F)P(G)) AND **P(EFG) = P(E)P(F)P(G)**.
+    *   **Generalization**: Events E1, E2, ..., En are independent if for every subset of these events, the probability of their intersection is the product of their individual probabilities.
+*   **Independent Subexperiments**: When a probability experiment consists of a sequence of subexperiments, and the outcomes of any group of subexperiments have no effect on the probabilities of outcomes of other subexperiments, the subexperiments are independent.
+    *   *Example*: For a parallel system of *n* independent components, where component *i* functions with probability *pi*, the probability that the system functions (at least one component functions) is **1 − ∏i=1 to n (1 − pi)**.

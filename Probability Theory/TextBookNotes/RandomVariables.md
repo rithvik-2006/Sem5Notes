@@ -1,251 +1,145 @@
-Here are detailed revision notes on Chapter 2, "Random Variables", drawing upon the provided source material:
+Here are detailed revision notes on Chapter 4: "Random Variables and Expectation", drawing directly from the provided source.
 
-### 2 Random Variables
+---
 
-This chapter introduces the **important concept of a random variable**. It often occurs that in an experiment, we are primarily interested in some **functions of the outcome** rather than the outcome itself. This chapter, along with Chapter 1 and Chapter 3, is concerned with the study of basic probability theory, which is essential to master both "model building" and subsequent analysis of probability models.
+### Chapter 4: Random Variables and Expectation
 
-### 2.1 Random Variables
+This chapter introduces the fundamental concept of a **random variable**, which transforms the outcomes of an experiment into numerical values, allowing for quantitative analysis of probabilistic phenomena. It then delves into the different types of random variables, their distributions, and key measures such as **expectation** and **variance**, which summarise their properties. The chapter also covers important theorems like the **Weak Law of Large Numbers**, providing insights into the behaviour of sample averages.
 
-A **random variable** is a **real-valued function defined on the sample space**. Its value is determined by the outcome of an experiment, allowing probabilities to be assigned to its possible values.
+### 4.1 & 4.2 Random Variables and Their Types
 
-*   **Examples**:
-    *   If two fair dice are tossed, the **sum of the two dice** can be defined as a random variable, X. The probabilities for each possible sum (from 2 to 12) can be calculated based on the outcomes in the sample space.
-    *   For two fair coin tosses, Y, the **number of heads appearing**, is a random variable taking values 0, 1, or 2 with their respective probabilities.
-    *   If a coin with probability *p* of heads is tossed until the first head appears, N, the **number of flips required**, is a random variable. The probability for N=n is *(1-p)^(n-1)p*.
-    *   Measuring a car's lifetime, where the sample space is [0, ∞), can be represented by a random variable.
+*   **Random Variable**: A numerical quantity determined by the result of an experiment. Instead of being interested in all the details of an experimental result, we are often only interested in the value of some numerical quantity derived from it.
+    *   *Example*: When rolling two fair dice, we might be interested in the sum of the dice (X), rather than the individual outcomes like (1,6) or (2,5).
+*   **Probability Assignment**: Since the value of a random variable is determined by the outcome of the experiment, probabilities can be assigned to its possible values.
 
-Random variables can take on either a **finite or countable number of possible values (discrete)** or a **continuum of possible values (continuous)**.
+**Types of Random Variables**:
 
-The **cumulative distribution function (cdf)** or **distribution function**, F(*b*), of a random variable X is defined as **P{X ≤ b}**.
-*   **Properties of the cdf F**:
-    *   (i) **F(*b*) is a nondecreasing function of *b***.
-    *   (ii) **lim F(*b*) as *b* → ∞ is F(∞) = 1**.
-    *   (iii) **lim F(*b*) as *b* → -∞ is F(-∞) = 0**.
-*   All probability questions about X can be answered using F(·). For instance, **P{a < X ≤ b} = F(*b*) - F(*a*)** for all *a* < *b*.
-*   **P{X < b} = lim F(*b* - h) as h → 0+**. This is not necessarily equal to F(*b*) as F(*b*) includes P{X=b}.
+1.  **Discrete Random Variable**: A random variable whose set of possible values is a sequence (countable).
+    *   **Probability Mass Function (PMF), p(a)**: For a discrete random variable X, p(a) = P{X = a}.
+        *   Properties: p(xi) > 0 for a countable number of values xi, and p(x) = 0 for all other values.
+        *   **Axiom**: The sum of probabilities for all possible values must equal 1: ∑i p(xi) = 1.
+2.  **Continuous Random Variable**: A random variable whose set of possible values is an interval, and there exists a non-negative function f(x) (probability density function) defined for all real x.
+    *   **Probability Density Function (PDF), f(x)**: For any set B of real numbers, P{X ∈ B} = ∫B f(x) dx.
+        *   Properties: The total probability over all possible values must be 1: ∫∞−∞ f(x) dx = 1.
+        *   For any specific value 'a', the probability P{X = a} = ∫a_a f(x) dx = 0.
+    *   **Cumulative Distribution Function (CDF), F(x)**: For any type of random variable, F(x) = P{X ≤ x}.
+        *   **Relationship between CDF and PDF**: For a continuous random variable, d/dx F(x) = f(x).
+        *   **Probability of an Interval**: P{a < X ≤ b} = F(b) - F(a).
 
-### 2.2 Discrete Random Variables
+### 4.3 Jointly Distributed Random Variables
 
-A random variable is **discrete** if it can take on at most a countable number of possible values.
-*   **Probability Mass Function (PMF)**: For a discrete random variable X, the PMF, *p*(*a*), is defined by **p(*a*) = P{X = *a*}**.
-    *   *p*(*x*) is positive for at most a countable number of values *x*, and the sum of *p*(*xi*) for all possible values *xi* equals **1**.
-*   The CDF F(*a*) can be expressed as the **sum of *p*(*xi*) for all *xi* ≤ *a***.
+Often, we are interested in the relationship between two or more random variables from a single experiment.
 
-#### 2.2.1 The Bernoulli Random Variable
+*   **Joint Cumulative Probability Distribution Function (F(x, y))**: Defined for two random variables X and Y as F(x, y) = P{X ≤ x, Y ≤ y}.
+    *   **Marginal CDFs**: Fx(x) = P{X ≤ x} = P{X ≤ x, Y ≤ ∞} = lim(y→∞) F(x, y).
+*   **Joint Probability Mass Function (p(x, y))**: For discrete random variables X and Y, p(x, y) = P{X = x, Y = y}.
+    *   **Marginal Probability Mass Functions**: Obtained by summing over the other variable:
+        *   Px(xi) = P{X = xi} = ∑j p(xi, yj)
+        *   Py(yj) = P{Y = yj} = ∑i p(xi, yj)
+    *   *Note*: Knowledge of marginal PMFs does not uniquely determine the joint PMF.
+*   **Joint Probability Density Function (f(x, y))**: For continuous random variables X and Y, defined such that P{X ∈ A, Y ∈ B} = ∫B ∫A f(x, y) dx dy.
+    *   **Relationship to Joint CDF**: f(a, b) = ∂²/∂a∂b F(a, b).
+    *   **Interpretation**: f(a, b)da db ≈ P{a < X < a + da, b < Y < b + db} for small da, db.
 
-A **Bernoulli random variable** X takes on value **1 (success) with probability *p*** and **0 (failure) with probability 1-*p***. Its probability mass function is:
-*   **p(0) = P{X = 0} = 1 - p**
-*   **p(1) = P{X = 1} = p**
+### 4.3.1 Independent Random Variables
 
-#### 2.2.2 The Binomial Random Variable
+*   **Definition**: Two random variables X and Y are **independent** if, for any two sets of real numbers A and B, P{X ∈ A, Y ∈ B} = P{X ∈ A}P{Y ∈ B}.
+    *   **Equivalent Condition for Independence (using CDFs)**: F(a, b) = Fx(a)Fy(b) for all a, b.
+    *   **Equivalent Condition for Discrete Variables**: p(x, y) = px(x)py(y) for all x, y.
+    *   **Equivalent Condition for Continuous Variables**: f(x, y) = fx(x)fy(y) for all x, y.
+    *   **Interpretation**: Knowing the value of one independent random variable does not change the distribution of the other.
+    *   **Dependent Events**: Random variables that are not independent are said to be dependent.
+*   **Independence for Multiple Random Variables**: Events E1, E2, ..., En are independent if for every subset, the probability of their intersection is the product of their individual probabilities.
 
-A **binomial random variable** X with **parameters (*n*, *p*)** represents the **number of successes** in *n* independent trials, where each trial results in a success with probability *p* and a failure with probability 1-*p*.
-*   Its probability mass function is:
-    **P{X = *i*} = (*n* choose *i*) *p*^(*i*) (1 - *p*)^(*n*-*i*)**.
-*   The sum of these probabilities over all *i* (from 0 to *n*) is 1, as per the binomial theorem.
-*   **Example**: Flipping four fair coins, the probability of two heads and two tails is (4 choose 2)(1/2)^2(1/2)^2 = 3/8.
+### 4.3.2 Conditional Distributions (Optional Section)
 
-#### 2.2.3 The Geometric Random Variable
+*   **Conditional Probability Mass Function**: For discrete X and Y, pX|Y(x|y) = P{X = x | Y = y} = P{X = x, Y = y} / P{Y = y} = p(x, y) / pY(y), provided pY(y) > 0.
+*   **Conditional Probability Density Function**: For continuous X and Y, fX|Y(x|y) = f(x, y) / fY(y), provided fY(y) > 0.
 
-A **geometric random variable** X with **parameter *p*** (0 ≤ *p* ≤ 1) represents the **number of trials required to obtain the first success** in a sequence of independent trials, where each trial is a success with probability *p*.
-*   Its probability mass function is:
-    **p(*n*) = P{X = *n*} = p(1 - p)^(*n*-1)**, for *n* ≥ 1.
-*   This is a valid PMF, as the sum over all *n* equals 1.
+### 4.4 Expectation
 
-#### 2.2.4 The Poisson Random Variable
+The expectation, or expected value, of a random variable is a crucial concept representing the "average" value in the long run.
 
-A **Poisson random variable** X with **parameter λ** (λ > 0) takes on values 0, 1, 2, ....
-*   Its probability mass function is:
-    **p(*i*) = P{X = *i*} = e^(-λ) λ^(*i*) / *i***!**, for *i* = 0, 1, ....
-*   This is a valid PMF, as the sum over all *i* equals 1.
-*   **Approximation of Binomial**: An important property is that the Poisson random variable can **approximate a binomial random variable** when *n* is large and *p* is small, with **λ = *np***.
-*   **Applications**: The Poisson random variable has a wide range of applications.
-    *   **Example**: If typographical errors on a page follow a Poisson distribution with λ=1, the probability of at least one error is 1 - e^(-1) ≈ 0.633.
+*   **Definition for Discrete Random Variable**: If X takes possible values x1, x2, ..., then the expectation, denoted E[X], is defined by:
+    **E[X] = ∑i xi P{X = xi}**.
+    *   *Interpretation*: A weighted average of the possible values, weighted by their probabilities.
+    *   *Example (Fair Die)*: E[X] = 1(1/6) + ... + 6(1/6) = 7/2.
+    *   *Example (Indicator Variable)*: If I is an indicator variable for event A (I=1 if A occurs, I=0 otherwise), then **E[I] = P(A)**.
+*   **Definition for Continuous Random Variable**: If X has PDF f(x), then:
+    **E[X] = ∫∞−∞ x f(x) dx**.
+    *   *Interpretation*: The centre of gravity of the probability distribution.
 
-### 2.3 Continuous Random Variables
+### 4.5 Properties of the Expected Value
 
-A random variable X is **continuous** if there exists a **nonnegative function *f*(*x*)**, called the **probability density function (PDF)**, such that for any set B of real numbers, **P{X ∈ B} = ∫*B* *f*(*x*) d*x***.
-*   Since X must assume some value, *f*(*x*) must satisfy: **∫*−∞*^∞* *f*(*x*) d*x* = 1**.
-*   **Interpretation**: The probability that X will be in an interval of length ε around point *a* is approximately ε*f*(*a*). Thus, *f*(*a*) measures how likely the random variable is to be near *a*.
+*   **Expectation of a Function of a Random Variable (Proposition 4.5.1)**:
+    *   If X is discrete with PMF p(x), then **E[g(X)] = ∑x g(x)p(x)**.
+    *   If X is continuous with PDF f(x), then **E[g(X)] = ∫∞−∞ g(x)f(x) dx**.
+    *   *Proof Sketch*: (Intuitive) The expected value of g(X) is a weighted average of the possible values g(x), with the weight for g(x) being the probability or probability density that X equals x.
+*   **Linearity of Expectation (Corollary 4.5.2)**: For any constants a and b, **E[aX + b] = aE[X] + b**.
+    *   *Proof Sketch*: Substitute `ax+b` for `g(x)` in Proposition 4.5.1 and apply the properties of summation/integration.
+    *   **Corollaries**: E[b] = b and E[aX] = aE[X].
+*   **Expected Value of Sums of Random Variables**: For any random variables X and Y, **E[X + Y] = E[X] + E[Y]**.
+    *   *Proof Sketch*: For continuous case, E[X+Y] = ∫∫ (x+y)f(x,y) dx dy = ∫∫ xf(x,y) dx dy + ∫∫ yf(x,y) dx dy = E[X] + E[Y].
+    *   **Generalization**: For any n random variables X1, ..., Xn, **E[∑ni=1 Xi] = ∑ni=1 E[Xi]**.
+*   **Best Predictor**: The mean μ is the best predictor of a random variable X in terms of minimizing the expected square of its error, E[(X - c)²].
+    *   *Proof Sketch*: E[(X - c)²] = E[(X - μ + μ - c)²] = E[(X - μ)²] + 2(μ - c)E[X - μ] + (μ - c)². Since E[X - μ] = 0, this simplifies to E[(X - μ)²] + (μ - c)², which is minimized when c = μ.
 
-#### 2.3.1 The Uniform Random Variable
+### 4.6 Variance
 
-A random variable X is **uniformly distributed over the interval (*α*, *β*)** if its PDF is:
-*   ***f*(*x*) = 1 / (*β* - *α*)** for *α* < *x* < *β*, and 0 otherwise.
-*   This means X is equally likely to be "near" any value within (*α*, *β*).
-*   **P{a ≤ X ≤ b} = (*b* - *a*) / (*β* - *α*)** for *α* < *a* < *b* < *β*.
-*   The **CDF** is:
-    *   F(*a*) = 0, *a* ≤ *α*
-    *   F(*a*) = (*a* - *α*) / (*β* - *α*), *α* < *a* < *β*
-    *   F(*a*) = 1, *a* ≥ *β*
+*   **Definition**: The **variance** of a random variable X, denoted Var(X), measures the spread or variation of its values around its mean (μ = E[X]).
+    **Var(X) = E[(X - μ)²] = E[X²] - (E[X])²**.
+*   **Standard Deviation**: The quantity **√Var(X)** is called the standard deviation of X. It has the same units as the mean.
+*   **Variance of an Indicator Random Variable**: If I is an indicator variable for event A, then **Var(I) = P(A)[1 - P(A)]**.
+*   **Properties of Variance**: For any constants a and b, **Var(aX + b) = a²Var(X)**.
+    *   *Proof Sketch*: Var(aX + b) = E[(aX + b - E[aX + b])²] = E[(aX + b - (aμ + b))²] = E[(aX - aμ)²] = E[a²(X - μ)²] = a²E[(X - μ)²] = a²Var(X).
+    *   **Corollaries**: Var(b) = 0 (variance of a constant is zero), Var(X + b) = Var(X) (adding a constant does not change variance), Var(aX) = a²Var(X).
 
-#### 2.3.2 Exponential Random Variables
+### 4.7 Covariance and Variance of Sums of Random Variables
 
-An **exponential random variable** with **parameter λ** (λ > 0) has the PDF:
-*   ***f*(*x*) = λe^(-λ*x*)**, if *x* ≥ 0, and 0 if *x* < 0.
-*   The **CDF** is: **F(*x*) = 1 - e^(-λ*x*)** for *x* ≥ 0, and 0 for *x* < 0.
+*   **Covariance (Cov(X, Y))**: A measure of the joint variability of two random variables.
+    **Cov(X, Y) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]**.
+    *   **Properties**:
+        *   Cov(X, Y) = Cov(Y, X)
+        *   Cov(X, X) = Var(X)
+        *   Cov(aX, Y) = aCov(X, Y)
+        *   **Proposition 4.7.2**: Cov(∑ni=1 Xi, ∑mj=1 Yj) = ∑ni=1 ∑mj=1 Cov(Xi, Yj).
+*   **Variance of a Sum (Corollary 4.7.3)**: For any random variables X1, ..., Xn:
+    **Var(∑ni=1 Xi) = ∑ni=1 Var(Xi) + ∑ni=1 ∑nj=1, j≠i Cov(Xi, Xj)**.
+    *   *Proof Sketch*: Derived from Proposition 4.7.2 by expanding Cov(∑Xi, ∑Xj).
+    *   For n=2: Var(X + Y) = Var(X) + Var(Y) + 2Cov(X, Y).
+*   **Theorem 4.7.4 (Variance of Sums of Independent Random Variables)**: If X and Y are independent random variables, then **Cov(X, Y) = 0**. Consequently, for independent X1, ..., Xn:
+    **Var(∑ni=1 Xi) = ∑ni=1 Var(Xi)**.
+    *   *Proof Sketch*: If X and Y are independent, E[XY] = E[X]E[Y], which directly implies Cov(X, Y) = 0. The sum variance result then follows from Corollary 4.7.3.
+*   **Correlation Coefficient (Corr(X, Y))**: A normalized measure of the linear relationship between X and Y.
+    **Corr(X, Y) = Cov(X, Y) / (√Var(X)Var(Y))**.
+    *   **Property**: The value always lies between -1 and +1 [-1 ≤ Corr(X,Y) ≤ 1].
 
-#### 2.3.3 Gamma Random Variables
+### 4.8 Moment Generating Functions (Optional Section)
 
-The source mentions gamma random variables but does not provide details of their PDF or properties in this section.
+*   **Definition**: The **moment generating function (MGF)** φ(t) of a random variable X is defined for all values t by:
+    **φ(t) = E[e^(tX)]**.
+    *   **For Discrete X**: φ(t) = ∑x e^(tx)p(x).
+    *   **For Continuous X**: φ(t) = ∫∞−∞ e^(tx)f(x) dx.
+*   **Generating Moments**: The nth moment of X, E[Xⁿ], can be obtained by taking the nth derivative of φ(t) and evaluating it at t = 0:
+    **E[Xⁿ] = φⁿ(0)**.
+*   **MGF of a Sum of Independent Random Variables**: If X and Y are independent, then the MGF of their sum is the product of their individual MGFs:
+    **φX+Y(t) = φX(t)φY(t)**.
+    *   *Proof Sketch*: φX+Y(t) = E[e^(t(X+Y))] = E[e^(tX)e^(tY)]. By independence, E[e^(tX)e^(tY)] = E[e^(tX)]E[e^(tY)] = φX(t)φY(t).
+*   **Uniqueness**: The moment generating function uniquely determines the distribution of a random variable.
 
-#### 2.3.4 Normal Random Variables
+### 4.9 Chebyshev’s Inequality and the Weak Law of Large Numbers
 
-A **normal random variable** (or normally distributed) with **parameters µ and σ²** has the PDF:
-*   ***f*(*x*) = (1 / √(2π)σ) e^(-(x-µ)² / 2σ²)**, for -∞ < *x* < ∞.
-*   This density function is a **bell-shaped curve** symmetric around µ.
-*   If X is normally distributed with parameters µ and σ², then **Y = *α*X + *β*** is normally distributed with parameters ***α*µ + *β*** and ***α²σ²***.
-*   If X is normal with parameters µ and σ², then **Y = (X-µ)/σ** is normally distributed with parameters **0 and 1**, known as the **standard or unit normal distribution**.
+These inequalities provide bounds on probabilities when only the mean or both the mean and variance are known.
 
-### 2.4 Expectation of a Random Variable
+*   **Proposition 4.9.1 (Markov’s Inequality)**: If X is a nonnegative random variable, then for any value a > 0:
+    **P{X ≥ a} ≤ E[X] / a**.
+    *   *Proof Sketch*: For continuous X, E[X] = ∫∞0 xf(x) dx = ∫a0 xf(x) dx + ∫∞a xf(x) dx. Since x ≥ a in the second integral, ∫∞a xf(x) dx ≥ ∫∞a af(x) dx = aP{X ≥ a}. Thus, E[X] ≥ aP{X ≥ a], leading to the inequality.
+*   **Proposition 4.9.2 (Chebyshev’s Inequality)**: If X is a random variable with mean μ and variance σ², then for any value k > 0:
+    **P{|X - μ| ≥ k} ≤ σ² / k²**.
+    *   *Proof Sketch*: Apply Markov’s inequality to the nonnegative random variable (X - μ)² with a = k². P{(X - μ)² ≥ k²} ≤ E[(X - μ)²]/k². Since (X - μ)² ≥ k² is equivalent to |X - μ| ≥ k, and E[(X - μ)²] = σ², the result follows.
+    *   **Alternative Form**: P{|X - μ| > kσ} ≤ 1/k².
+*   **Theorem 4.9.3 (The Weak Law of Large Numbers)**: Let X1, X2, ..., Xn be a sequence of independent and identically distributed random variables, each having mean E[Xi] = μ. Then, for any ε > 0:
+    **P{|(X1 + ... + Xn)/n - μ| > ε} → 0 as n → ∞**.
+    *   *Proof Sketch*: (Under assumption of finite variance σ²). Let X̄n = (X1 + ... + Xn)/n. We know E[X̄n] = μ and Var(X̄n) = σ²/n. By Chebyshev’s inequality, P{|X̄n - μ| > ε} ≤ Var(X̄n)/ε² = (σ²/n)/ε². As n → ∞, (σ²/n)/ε² → 0, proving the theorem.
 
-The **expected value of X**, denoted **E[X]**, is also known as the **mean** or the **first moment of X**. It is a weighted average of the possible values X can take, weighted by their probabilities.
-
-#### 2.4.1 The Discrete Case
-
-If X is a discrete random variable with PMF *p*(*x*), its expected value is:
-*   **E[X] = ∑*x:p(x)>0* *x*p(*x*)**.
-*   **Example**: For a fair die, E[X] = (1/6)(1+2+3+4+5+6) = 7/2.
-*   **Expectation of a Bernoulli Random Variable**: E[X] = *p*.
-*   **Expectation of a Binomial Random Variable**: E[X] = *np*.
-*   **Expectation of a Geometric Random Variable**: E[X] = 1/*p*.
-*   **Expectation of a Poisson Random Variable**: E[X] = λ.
-
-#### 2.4.2 The Continuous Case
-
-If X is a continuous random variable with PDF *f*(*x*), its expected value is:
-*   **E[X] = ∫*−∞*^∞* *x*f*(*x*) d*x***.
-*   **Example**: For a uniform random variable on (*α*, *β*), E[X] = (*α* + *β*) / 2.
-*   **Expectation of an Exponential Random Variable**: E[X] = 1/λ.
-*   **Expectation of a Normal Random Variable**: E[X] = µ.
-
-#### 2.4.3 Expectation of a Function of a Random Variable
-
-If X has a probability distribution and *g* is a real-valued function, the expected value of *g*(X) can be computed directly without first finding the distribution of *g*(X).
-*   **Proposition 2.1**:
-    *   For **discrete** X: **E[*g*(X)] = ∑*x:p(x)>0* *g*(*x*)*p*(*x*)**.
-    *   For **continuous** X: **E[*g*(X)] = ∫*−∞*^∞* *g*(*x*)*f*(*x*) d*x***.
-*   **Corollary 2.2**: For constants *a* and *b*, **E[*a*X + *b*] = *a*E[X] + *b***.
-*   The quantity **E[X^*n*]** is called the **nth moment of X**.
-*   **Variance of a Random Variable (Var(X))**: Defined as **E[(X - E[X])²]**. It measures the expected square of the deviation of X from its expected value.
-    *   **Identity**: **Var(X) = E[X²] - (E[X])²**.
-    *   **Example**: For a normal random variable, Var(X) = σ².
-
-### 2.5 Jointly Distributed Random Variables
-
-Often, we are interested in probability statements concerning two or more random variables.
-
-#### 2.5.1 Joint Distribution Functions
-
-*   **Joint Cumulative Probability Distribution Function**: For two random variables X and Y, defined as **F(*a*, *b*) = P{X ≤ *a*, Y ≤ *b*}**.
-*   **Marginal Distributions**:
-    *   **F*X*(*a*) = P{X ≤ *a*} = F(*a*, ∞)**.
-    *   **F*Y*(*b*) = P{Y ≤ *b*} = F(∞, *b*)**.
-*   **Joint Probability Mass Function (discrete)**: **p(*x*, *y*) = P{X = *x*, Y = *y*}**.
-*   **Joint Probability Density Function (continuous)**: **f(*x*, *y*)**. **∂²F(*a*, *b*) / (*∂a* *∂b*) = *f*(*a*, *b*)**.
-*   **Expectation of a function of two variables**:
-    *   **E[*g*(X, Y)] = ∑*y* ∑*x* *g*(*x*, *y*)*p*(*x*, *y*)** (discrete)
-    *   **E[*g*(X, Y)] = ∫*−∞*^∞* ∫*−∞*^∞* *g*(*x*, *y*)*f*(*x*, *y*) d*x* d*y*** (continuous)
-*   **Additivity of Expectation**: **E[*a*X + *b*Y] = *a*E[X] + *b*E[Y]**. This generalizes to *n* random variables: **E[∑*n* *a*i*X*i*] = ∑*n* *a*i*E[X*i*]**.
-
-#### 2.5.2 Independent Random Variables
-
-Two events E and F are **independent if P(EF) = P(E)P(F)**. Similarly, X and Y are **independent** if:
-*   **P{X ≤ *a*, Y ≤ *b*} = P{X ≤ *a*}P{Y ≤ *b*}** for all *a*, *b*.
-*   This means **F(*a*, *b*) = F*X*(*a*)F*Y*(*b*)**.
-*   For discrete variables, independence implies **p(*x*, *y*) = p*X*(*x*)*p*Y*(*y*)**.
-*   **Proposition 2.3**: If X and Y are independent, then for any functions *h* and *g*, **E[*g*(X)*h*(Y)] = E[*g*(X)]E[*h*(Y)]**.
-*   **Intuitive meaning**: Knowledge of one event occurring does not affect the probability of the other.
-*   **Pairwise Independent vs. Mutually Independent**: Events can be pairwise independent but not mutually independent.
-
-#### 2.5.3 Covariance and Variance of Sums of Random Variables
-
-*   **Covariance (Cov(X, Y))**: Defined as **Cov(X, Y) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]**.
-*   **Properties of Covariance**:
-    1.  **Cov(X, X) = Var(X)**.
-    2.  **Cov(X, Y) = Cov(Y, X)**.
-    3.  **Cov(*c*X, Y) = *c*Cov(X, Y)**.
-    4.  **Cov(X, Y + Z) = Cov(X, Y) + Cov(X, Z)**.
-    *   Generalizes to **Cov(∑*n* Xi, ∑*m* Yj) = ∑*n* ∑*m* Cov(Xi, Yj)**.
-*   **Variance of Sums**: **Var(∑*n* Xi) = ∑*n* Var(Xi) + 2 ∑*i*<*j* Cov(Xi, Xj)**.
-*   If Xi are **independent**, then **Var(∑*n* Xi) = ∑*n* Var(Xi)**.
-*   **Sample Mean**: For independent and identically distributed (i.i.d.) X1, ..., Xn, **X̄ = ∑*n* Xi/*n***.
-    *   **Proposition 2.4**: If X1, ..., Xn are i.i.d. with mean µ and variance σ²:
-        *   (a) **E[X̄] = µ**.
-        *   (b) **Var(X̄) = σ²/n**.
-        *   (c) **Cov(X̄, Xi - X̄) = 0**.
-*   **Example**: **Variance of a Binomial Random Variable**: Var(X) = *np*(1-*p*).
-
-#### 2.5.4 Joint Probability Distribution of Functions of Random Variables
-
-To obtain the joint distribution of Y1 = *g*1(X1, X2) and Y2 = *g*2(X1, X2) from *f*X1,X2(*x*1, *x*2), assuming unique solutions *x*1 = *h*1(*y*1, *y*2) and *x*2 = *h*2(*y*1, *y*2), and continuous partial derivatives with a **non-zero Jacobian determinant J(*x*1, *x*2)**:
-*   **fY1,Y2(*y*1, *y*2) = *f*X1,X2(*x*1, *x*2) |J(*x*1, *x*2)|^(-1)**.
-*   **Jacobian**: J(*x*1, *x*2) = |∂*g*1/∂*x*1 ∂*g*1/∂*x*2; ∂*g*2/∂*x*1 ∂*g*2/∂*x*2|.
-*   **Example**: Sum of two independent uniform random variables leads to a triangular density. Sum of independent Poisson random variables is also Poisson.
-*   **Order Statistics**: For i.i.d. continuous random variables X1, ..., Xn with CDF F and density *f*, the density of X(*i*) (the *i*th smallest) is given by **n! / ((n-*i*)!(*i*-1)!) *f*(*x*)(F(*x*))^(i-1)(1-F(*x*))^(n-i)**.
-
-### 2.6 Moment Generating Functions
-
-The **moment generating function (MGF)** *φ*(*t*) of a random variable X is defined for all values *t* by **φ(*t*) = E[e^(tX)]**.
-*   **Properties**:
-    *   *φ*'(0) = E[X].
-    *   *φ*''(*t*) = E[X²e^(tX)], so *φ*''(0) = E[X²].
-    *   The MGF **uniquely determines the distribution**.
-*   **MGF of common distributions**:
-    *   **Binomial (*n*, *p*)**: *φ*(*t*) = (*pe*^t + 1 - *p*)^*n*. (Mean *np*, Variance *np*(1-*p*)).
-    *   **Poisson (λ)**: *φ*(*t*) = exp{λ(*e*^t - 1)}. (Mean λ, Variance λ).
-    *   **Exponential (λ)**: *φ*(*t*) = λ / (λ - *t*) for *t* < λ. (Mean 1/λ, Variance 1/λ²).
-    *   **Normal (µ, σ²)**: *φ*(*t*) = exp{µ*t* + σ²*t*²/2}. (Mean µ, Variance σ²).
-*   **MGF of a Sum of Independent Random Variables**: If X and Y are independent, *φ*X+Y(*t*) = *φ*X(*t*)*φ*Y(*t*).
-    *   **Example**: Sum of independent binomials with same *p* is also binomial. Sum of independent Poissons is also Poisson. Sum of independent normals is also normal.
-*   **Joint Moment Generating Function**: For X1, ..., Xn, defined as *φ*(*t*1, ..., *t*n) = E[exp{∑*n* *t*i*X*i*}]. It uniquely determines the joint distribution.
-    *   **Multivariate Normal Distribution**: Defined for linear combinations of independent standard normal variables. Its joint MGF shows that the joint distribution is determined by means E[Xi] and covariances Cov(Xi, Xj).
-
-### 2.6.1 The Joint Distribution of the Sample Mean and Sample Variance from a Normal Population
-
-For i.i.d. random variables X1, ..., Xn with mean µ and variance σ², the **sample variance S² = ∑*n* (*X*i - X̄)² / (*n* - 1)**.
-*   **E[S²] = σ²**.
-*   **Chi-squared Random Variable**: If Z1, ..., Zn are independent standard normal random variables, then ∑*n* Z*i*² is a **chi-squared random variable with *n* degrees of freedom**. Its MGF is (1 - 2*t*)^(-*n*/2).
-*   **Proposition 2.5**: If X1, ..., Xn are i.i.d. **normal** random variables with mean µ and variance σ²:
-    *   The **sample mean X̄ and the sample variance S² are independent**.
-    *   **X̄ is a normal random variable** with mean µ and variance σ²/n.
-    *   **(*n* - 1)S²/σ² is a chi-squared random variable** with *n* - 1 degrees of freedom.
-
-### 2.7 The Distribution of the Number of Events that Occur
-
-For arbitrary events A1, ..., An, let X be the number of these events that occur. Let **Sk = ∑ P(A*i*1 ... A*i*k)** be the sum of probabilities of all (*n* choose *k*) intersections of *k* distinct events.
-*   The **inclusion-exclusion identity** states **P(X > 0) = S1 - S2 + S3 - ... + (-1)^(n+1)Sn**.
-*   The probability mass function of X is given by:
-    **P(X = *k*) = Sk - (*k*+1 choose *k*)Sk+1 + (*k*+2 choose *k*)Sk+2 - ... + (-1)^(n-*k*) (*n* choose *k*)Sn**.
-    This can be written as **P(X = *k*) = ∑*j*=*k*^n* (-1)^(k+j) (*j* choose *k*)Sj**.
-*   The probability that at least *k* events occur is:
-    **P(X ≥ *k*) = ∑*j*=*k*^n* (-1)^(k+j) (*j*-1 choose *k*-1)Sj**.
-
-### 2.8 Limit Theorems
-
-#### Proposition 2.6 (Markov’s Inequality)
-
-If X is a **nonnegative random variable**, then for any value *a* > 0:
-*   **P{X ≥ *a*} ≤ E[X] / *a***.
-*   **Example**: If mean weekly production is 500, the probability of at least 1000 units is ≤ 500/1000 = 0.5.
-
-#### Theorem 2.1 (Strong Law of Large Numbers)
-
-Let X1, X2, ... be a sequence of **independent random variables having a common distribution**, and let E[Xi] = µ. Then, **with probability 1**:
-*   **(X1 + X2 + ... + Xn) / n → µ as n → ∞**.
-*   This implies that the **limiting proportion of time an event E occurs is P(E)**.
-
-#### Theorem 2.2 (Central Limit Theorem)
-
-Let X1, X2, ... be a sequence of **independent, identically distributed random variables**, each with mean µ and variance σ². Then the distribution of:
-*   **(X1 + X2 + ... + Xn - nµ) / (σ√*n*)** **tends to the standard normal as n → ∞**.
-*   **P{(X1 + ... + Xn - nµ) / (σ√*n*) ≤ *a*} → (1 / √(2π)) ∫*−∞*^a* e^(-x²/2) d*x*** as n → ∞.
-*   This theorem is powerful because it holds for any distribution of the Xis.
-*   **Approximation**: The binomial distribution can be approximated by a normal distribution for large *n*.
-
-### 2.9 Stochastic Processes
-
-A **stochastic process {X(*t*), *t* ∈ T}** is a **collection of random variables**. For each *t* ∈ T, X(*t*) is a random variable.
-*   The index *t* is often interpreted as **time**, and X(*t*) as the **state of the process at time *t***.
-*   A stochastic process describes the **evolution through time of some (physical) process**.
-*   **Example**: A particle moving along a set of *m* + 1 nodes arranged in a circle, where its position at step *n* is X*n*.
+---
