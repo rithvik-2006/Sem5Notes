@@ -53,7 +53,7 @@ $y = 5$
 
 ### 3. Operations Used in Gaussian Elimination
 
-Only two fundamental operations are used during this transformation process:
+Two fundamental operations are used during this transformation process:
 
 1.  **Exchanging two rows.**
 2.  **Replacing `row_j` with $\alpha \cdot \text{row_i} + \text{row_j}$, where $\alpha$ is some constant.**
