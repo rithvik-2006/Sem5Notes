@@ -86,4 +86,4 @@ Here are the revision notes on all the definitions and propositions found in Cha
     *   `det(A) ≠ 0` (A is **non-singular**).
     *   The **Reduced Row Echelon Form (RREF) of A is the identity matrix I**.
     *   The system of equations `AX = C` has a **unique solution** for any `C`.
-    *   `A` is either **right or left invertible** (implies it is invertible).
+    *   `A` is either **right or left invertible** (implies it is invertible). 
